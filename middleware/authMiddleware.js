@@ -1,7 +1,6 @@
 // middleware/authMiddleware.js
 const jwt = require("jsonwebtoken");
-const dotenv = require("dotenv");
-dotenv.config();
+require("dotenv").config();
 
 const requireAuth = (req, res, next) => {
   const header = req.headers.authorization;
@@ -12,7 +11,7 @@ const requireAuth = (req, res, next) => {
 
   try {
     const payload = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = payload; // { id, email, role, iat, exp }
+    req.user = payload; // { id, email, role, ... }
     next();
   } catch (err) {
     return res.status(401).json({ message: "Invalid or expired token" });

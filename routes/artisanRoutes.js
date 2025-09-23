@@ -1,16 +1,16 @@
 // routes/artisanRoutes.js
 const express = require("express");
 const router = express.Router();
-const artisanController = require("../controllers/artisanController");
-const { requireAuth, requireAdmin } = require("../middleware/authMiddleware");
+const ctrl = require("../controllers/artisanController");
+const { requireAuth } = require("../middleware/authMiddleware");
 
-// PUBLIC: list and get
-router.get("/", artisanController.getAll);
-router.get("/:id", artisanController.getById);
+// Public
+router.get("/", ctrl.getAll);
+router.get("/:id", ctrl.getById);
 
-// PROTECTED (create/update/delete) - adjust to your policy
-router.post("/", requireAuth, artisanController.create);
-router.put("/:id", requireAuth, artisanController.update);
-router.delete("/:id", requireAuth, artisanController.remove);
+// Protected (you can switch some endpoints to admin-only by using requireAdmin)
+router.post("/", requireAuth, ctrl.create);
+router.put("/:id", requireAuth, ctrl.update);
+router.delete("/:id", requireAuth, ctrl.remove);
 
 module.exports = router;

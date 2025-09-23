@@ -1,7 +1,7 @@
 // controllers/artisanController.js
 const db = require("../config/db");
 
-// map db row fields to expected JSON keys (completed_jobs -> completedJobs)
+// helper: map DB row to frontend-friendly keys
 const mapRow = (r) => ({
   id: r.id,
   name: r.name,
@@ -17,7 +17,9 @@ const mapRow = (r) => ({
 
 exports.getAll = async (req, res, next) => {
   try {
-    const result = await db.query(`SELECT id, name, skill, location, phone, experience, description, rating, completed_jobs, avatar FROM artisans ORDER BY id`);
+    const result = await db.query(
+      `SELECT id, name, skill, location, phone, experience, description, rating, completed_jobs, avatar FROM artisans ORDER BY id`
+    );
     res.json(result.rows.map(mapRow));
   } catch (err) {
     next(err);
@@ -27,7 +29,10 @@ exports.getAll = async (req, res, next) => {
 exports.getById = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const result = await db.query(`SELECT id, name, skill, location, phone, experience, description, rating, completed_jobs, avatar FROM artisans WHERE id = $1`, [id]);
+    const result = await db.query(
+      `SELECT id, name, skill, location, phone, experience, description, rating, completed_jobs, avatar FROM artisans WHERE id = $1`,
+      [id]
+    );
     if (result.rows.length === 0) return res.status(404).json({ message: "Artisan not found" });
     res.json(mapRow(result.rows[0]));
   } catch (err) {

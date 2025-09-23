@@ -2,8 +2,7 @@
 const db = require("../config/db");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const dotenv = require("dotenv");
-dotenv.config();
+require("dotenv").config();
 
 const jwtSecret = process.env.JWT_SECRET || "dev_secret";
 
@@ -12,9 +11,16 @@ exports.register = async (req, res, next) => {
     const { email, password, name, role = "user" } = req.body;
     if (!email || !password) return res.status(400).json({ message: "Email and password required" });
 
+    // check if user exists
+    const exists = await db.query(`SELECT id FROM users WHERE email=$1`, [email]);
+    if (exists.rows.length) return res.status(409).json({ message: "Email already registered" });
+
     const hashed = await bcrypt.hash(password, 10);
-    await db.query(`INSERT INTO users (email, password, name, role) VALUES ($1,$2,$3,$4)`, [email, hashed, name, role]);
-    res.status(201).json({ message: "User registered" });
+    const result = await db.query(
+      `INSERT INTO users (email, password, name, role) VALUES ($1,$2,$3,$4) RETURNING id, email, name, role`,
+      [email, hashed, name, role]
+    );
+    res.status(201).json({ user: result.rows[0] });
   } catch (err) {
     next(err);
   }

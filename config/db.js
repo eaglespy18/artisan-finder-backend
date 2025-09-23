@@ -1,7 +1,6 @@
 // config/db.js
 const { Pool } = require("pg");
-const dotenv = require("dotenv");
-dotenv.config();
+require("dotenv").config();
 
 const pool = new Pool({
   host: process.env.DB_HOST || "localhost",
@@ -11,10 +10,11 @@ const pool = new Pool({
   database: process.env.DB_NAME
 });
 
-// helper to run queries
-const query = (text, params) => pool.query(text, params);
+pool.connect()
+  .then(() => console.log("✅ Connected to artisan_finder DB"))
+  .catch(err => console.error("❌ DB connection error:", err));
 
 module.exports = {
-  pool,
-  query
+  query: (text, params) => pool.query(text, params),
+  pool
 };
