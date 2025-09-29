@@ -13,7 +13,7 @@ const app = express();
 app.use(helmet());
 app.use(
   cors({
-    origin: "http://localhost:8080", // allow frontend requests
+    origin: "http://localhost:8080", // allow frontend requests or grands frontend requests permition
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
