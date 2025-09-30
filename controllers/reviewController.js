@@ -5,7 +5,7 @@ exports.getByArtisan = async (req, res, next) => {
   try {
     const { artisanId } = req.params;
 
-    // Fetch reviews
+    // Fetch artisan reviews
     const reviews = await db.query(
       `SELECT id, artisan_id, user_id, rating, comment, created_at
        FROM reviews
