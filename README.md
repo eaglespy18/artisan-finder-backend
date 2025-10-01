@@ -81,4 +81,4 @@ Deployment to cloud (Render, Railway, or AWS)
 📜 License
 MIT License © 2025 Artisan Finder Project
 
-Developer: ALHASSAN MOHAMMED KHIDIR
+Developer: ALHASSAN MOHAMMED KHIDIR | alhassankhidir@gmail.com |+233 243395565
