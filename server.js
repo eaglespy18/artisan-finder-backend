@@ -63,7 +63,7 @@ app.use("/reviews", reviewRoutes);
 app.get("/", (req, res) => res.send("✅ Artisan Finder Backend running"));
 
 // ---------------------
-// error handler (catch-all)
+// error handler (catch-all errors)
 // ---------------------
 const { errorHandler } = require("./middleware/errorHandler");
 app.use(errorHandler);
