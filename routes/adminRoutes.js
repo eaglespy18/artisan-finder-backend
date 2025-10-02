@@ -21,7 +21,7 @@ router.post(
     body("phone").isMobilePhone().withMessage("Invalid phone number"),
   ],
   handleValidation,
-  artisanController.createArtisan
+  artisanController.create   // ✅ use existing name
 );
 
 /**
@@ -39,7 +39,7 @@ router.put(
     body("phone").optional().isMobilePhone().withMessage("Invalid phone number"),
   ],
   handleValidation,
-  artisanController.updateArtisan
+  artisanController.update   // ✅ use existing name
 );
 
 /**
@@ -51,7 +51,7 @@ router.delete(
   requireAdmin,
   [param("id").isInt().withMessage("Invalid artisan ID")],
   handleValidation,
-  artisanController.deleteArtisan
+  artisanController.remove   // ✅ use existing name
 );
 
 module.exports = router;
