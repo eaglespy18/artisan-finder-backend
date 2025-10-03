@@ -9,6 +9,7 @@ const router = express.Router();
 
 /**
  * Admin-only: Create new artisan
+ * only Admin have access to the operation 
  */
 router.post(
   "/artisans",
@@ -26,6 +27,7 @@ router.post(
 
 /**
  * Admin-only: Update artisan
+ * only Admin have access to the operation 
  */
 router.put(
   "/artisans/:id",
@@ -44,6 +46,7 @@ router.put(
 
 /**
  * Admin-only: Delete artisan
+ * only Admin have access to the operation 
  */
 router.delete(
   "/artisans/:id",
