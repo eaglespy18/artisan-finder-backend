@@ -1,7 +1,7 @@
 // controllers/artisanController.js
 const db = require("../config/db");
 
-// helper: map DB row to frontend-friendly keys
+// helper: map Database row to frontend-friendly keys
 const mapRow = (r) => ({
   id: r.id,
   name: r.name,

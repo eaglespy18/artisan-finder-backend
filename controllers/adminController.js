@@ -1,7 +1,7 @@
 // controllers/adminController.js
 const db = require("../config/db");
 
-// Create artisan (Admin only)
+// Create artisan (Admin only can control the operation)
 exports.createArtisan = async (req, res, next) => {
   try {
     const { name, skill, location, phone, experience, description, rating, completed_jobs, avatar } = req.body;
@@ -19,7 +19,7 @@ exports.createArtisan = async (req, res, next) => {
   }
 };
 
-// Update artisan (Admin only)
+// Update artisan (Admin only can control the operation)
 exports.updateArtisan = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -51,7 +51,7 @@ exports.updateArtisan = async (req, res, next) => {
   }
 };
 
-// Delete artisan (Admin only)
+// Delete artisan (Admin only can control the opration)
 exports.deleteArtisan = async (req, res, next) => {
   try {
     const { id } = req.params;

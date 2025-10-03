@@ -88,7 +88,7 @@ exports.remove = async (req, res, next) => {
     const { id } = req.params;
     const userId = req.user?.id;
 
-    // make sure review belongs to user 
+    // Ensure review belongs to user 
     const check = await db.query(
       `SELECT * FROM reviews WHERE id=$1 AND user_id=$2`,
       [id, userId]
